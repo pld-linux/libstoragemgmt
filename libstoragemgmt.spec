@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	python2	# CPython 2.x support
 %bcond_without	python3	# CPython 3.x support
-%bcond_with	tests
+%bcond_with	tests	# tests
 
 Summary:	Storage array management library
 Summary(pl.UTF-8):	Biblioteka do zarządzania macierzami dyskowymi
@@ -17,7 +17,6 @@ Source0:	https://github.com/libstorage/libstoragemgmt/releases/download/%{versio
 URL:		https://github.com/libstorage/libstoragemgmt
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	check-devel >= 0.9.8
 BuildRequires:	glib2-devel >= 1:2.22.5
 BuildRequires:	libconfig-devel >= 1.3.2
 BuildRequires:	libstdc++-devel
@@ -43,6 +42,11 @@ BuildRequires:	rpmbuild(macros) >= 1.673
 BuildRequires:	sqlite3-devel >= 3
 BuildRequires:	systemd-devel
 BuildRequires:	udev-devel
+%if %{with tests}
+BuildRequires:	check-devel >= 0.9.8
+BuildRequires:	chrpath
+BuildRequires:	valgrind
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -264,10 +268,11 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 install -d build
 cd build
 ../%configure \
-	--with-bash-completion-dir=%{bash_compdir} \
-	--with-python3 \
 	--disable-silent-rules \
 	--disable-static \
+	--with-bash-completion-dir=%{bash_compdir} \
+	--with-python3 \
+	%{!?with_tests:--without-test}
 
 %{__make}
 cd ..
@@ -276,10 +281,11 @@ cd ..
 install -d build-py2
 cd build-py2
 ../%configure \
-	--with-bash-completion-dir=%{bash_compdir} \
-	--with-python2 \
 	--disable-silent-rules \
 	--disable-static \
+	--with-bash-completion-dir=%{bash_compdir} \
+	--with-python2 \
+	%{!?with_tests:--without-test}
 
 %{__make}
 cd ..
