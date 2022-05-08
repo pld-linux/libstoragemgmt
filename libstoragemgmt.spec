@@ -267,6 +267,12 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 	plugin/*_plugin/*_lsmplugin.in
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+
 install -d build
 cd build
 ../%configure \
@@ -318,6 +324,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/{lsm,nfs_plugin}/*.la
 %{__rm} -r $RPM_BUILD_ROOT%{py_sitedir}/*_plugin
+%{__rm} -r $RPM_BUILD_ROOT%{py_sitescriptdir}/*_plugin
+%py_postclean
 
 %{__rm} $RPM_BUILD_ROOT%{_bindir}/lsmcli
 %endif
@@ -499,28 +507,28 @@ fi
 %files plugin-arcconf
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/arcconf_lsmplugin
-%{py3_sitedir}/arcconf_plugin
+%{py3_sitescriptdir}/arcconf_plugin
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lsm/pluginconf.d/arcconf.conf
 %{_mandir}/man1/arcconf_lsmplugin.1*
 
 %files plugin-hpsa
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/hpsa_lsmplugin
-%{py3_sitedir}/hpsa_plugin
+%{py3_sitescriptdir}/hpsa_plugin
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lsm/pluginconf.d/hpsa.conf
 %{_mandir}/man1/hpsa_lsmplugin.1*
 
 %files plugin-local
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/local_lsmplugin
-%{py3_sitedir}/local_plugin
+%{py3_sitescriptdir}/local_plugin
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lsm/pluginconf.d/local.conf
 %{_mandir}/man1/local_lsmplugin.1*
 
 %files plugin-megaraid
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/megaraid_lsmplugin
-%{py3_sitedir}/megaraid_plugin
+%{py3_sitescriptdir}/megaraid_plugin
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lsm/pluginconf.d/megaraid.conf
 %{_mandir}/man1/megaraid_lsmplugin.1*
 
@@ -537,11 +545,11 @@ fi
 %files plugin-smis
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/smispy_lsmplugin
-%{py3_sitedir}/smispy_plugin
+%{py3_sitescriptdir}/smispy_plugin
 %{_mandir}/man1/smispy_lsmplugin.1*
 
 %files plugin-targetd
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/targetd_lsmplugin
-%{py3_sitedir}/targetd_plugin
+%{py3_sitescriptdir}/targetd_plugin
 %{_mandir}/man1/targetd_lsmplugin.1*
