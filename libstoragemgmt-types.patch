@@ -1,0 +1,11 @@
+--- libstoragemgmt-1.9.4/plugin/simc/mgm_ops.c.orig	2022-03-15 23:38:45.000000000 +0100
++++ libstoragemgmt-1.9.4/plugin/simc/mgm_ops.c	2022-05-08 20:14:24.552756902 +0200
+@@ -107,7 +107,7 @@ static const char *time_stamp_str_get(ch
+ 
+     if (clock_gettime(CLOCK_REALTIME, &ts) == 0)
+         snprintf(buff, _BUFF_SIZE, "%ld.%ld", (long)difftime(ts.tv_sec, 0),
+-                 ts.tv_nsec);
++                 (long)ts.tv_nsec);
+ 
+     return buff;
+ }

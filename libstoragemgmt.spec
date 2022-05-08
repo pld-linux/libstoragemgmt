@@ -14,6 +14,7 @@ Group:		Libraries
 #Source0Download: https://github.com/libstorage/libstoragemgmt/releases
 Source0:	https://github.com/libstorage/libstoragemgmt/releases/download/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	8fa7d545905d0e9d872d6611ab9cd5ec
+Patch0:		%{name}-types.patch
 URL:		https://github.com/libstorage/libstoragemgmt
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -257,6 +258,7 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python@PY_VERSION@,%{__python3},' \
 	tools/basic_check/local_check.py.in \
