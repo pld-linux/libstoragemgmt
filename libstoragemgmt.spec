@@ -7,13 +7,13 @@
 Summary:	Storage array management library
 Summary(pl.UTF-8):	Biblioteka do zarządzania macierzami dyskowymi
 Name:		libstoragemgmt
-Version:	1.9.4
+Version:	1.9.8
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/libstorage/libstoragemgmt/releases
 Source0:	https://github.com/libstorage/libstoragemgmt/releases/download/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	8fa7d545905d0e9d872d6611ab9cd5ec
+# Source0-md5:	0608b44ce238221ae1dff75bf3e6ff2c
 Patch0:		%{name}-types.patch
 URL:		https://github.com/libstorage/libstoragemgmt
 BuildRequires:	autoconf >= 2.50
@@ -21,7 +21,7 @@ BuildRequires:	automake
 BuildRequires:	glib2-devel >= 1:2.22.5
 BuildRequires:	libconfig-devel >= 1.3.2
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRequires:	libxml2-devel >= 1:2.5.0
 BuildRequires:	perl-base
 BuildRequires:	openssl-devel
@@ -265,6 +265,9 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 	tools/lsmcli/lsmcli.in \
 	tools/use_cases/find_unused_lun.py.in \
 	plugin/*_plugin/*_lsmplugin.in
+
+# daemon/lsb_daemon.c still specifies /var/run/lsm, adjust tmpfiles back
+%{__sed} -i -e 's, /run/lsm,/var/run/lsm,' packaging/daemon/libstoragemgmt.conf
 
 %build
 %{__libtoolize}
