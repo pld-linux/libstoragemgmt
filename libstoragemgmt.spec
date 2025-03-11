@@ -8,7 +8,7 @@ Summary:	Storage array management library
 Summary(pl.UTF-8):	Biblioteka do zarządzania macierzami dyskowymi
 Name:		libstoragemgmt
 Version:	1.9.8
-Release:	
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/libstorage/libstoragemgmt/releases
@@ -258,7 +258,7 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P 0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python@PY_VERSION@,%{__python3},' \
 	tools/basic_check/local_check.py.in \
