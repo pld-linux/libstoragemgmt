@@ -8,7 +8,7 @@ Summary:	Storage array management library
 Summary(pl.UTF-8):	Biblioteka do zarządzania macierzami dyskowymi
 Name:		libstoragemgmt
 Version:	1.9.8
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/libstorage/libstoragemgmt/releases
