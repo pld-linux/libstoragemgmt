@@ -39,7 +39,7 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-pywbem
 BuildRequires:	python3-six
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.673
+BuildRequires:	rpmbuild(macros) >= 2.043
 BuildRequires:	sqlite3-devel >= 3
 BuildRequires:	systemd-devel
 BuildRequires:	udev-devel
@@ -278,7 +278,8 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 
 install -d build
 cd build
-../%configure \
+%define	configuredir	..
+%configure \
 	--disable-silent-rules \
 	--disable-static \
 	--with-bash-completion-dir=%{bash_compdir} \
@@ -291,7 +292,7 @@ cd ..
 %if %{with python2}
 install -d build-py2
 cd build-py2
-../%configure \
+%configure \
 	--disable-silent-rules \
 	--disable-static \
 	--with-bash-completion-dir=%{bash_compdir} \
