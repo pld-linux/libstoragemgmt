@@ -8,7 +8,7 @@ Summary:	Storage array management library
 Summary(pl.UTF-8):	Biblioteka do zarządzania macierzami dyskowymi
 Name:		libstoragemgmt
 Version:	1.9.8
-Release:	3
+Release:	4
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://github.com/libstorage/libstoragemgmt/releases
@@ -269,6 +269,8 @@ Ten pakiet zawiera wtyczkę do obsługi macierzy targetd.
 
 # daemon/lsb_daemon.c still specifies /var/run/lsm, adjust tmpfiles back
 %{__sed} -i -e 's, /run/lsm,/var/run/lsm,' packaging/daemon/libstoragemgmt.conf
+
+%{__sed} -i -e 's#-Werror##g' configure.ac
 
 %build
 %{__libtoolize}
